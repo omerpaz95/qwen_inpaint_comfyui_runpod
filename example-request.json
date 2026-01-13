@@ -1,0 +1,257 @@
+{
+  "input": {
+    "workflow": {
+      "3": {
+        "inputs": {
+          "seed": 132,
+          "steps": 4,
+          "cfg": 1,
+          "sampler_name": "euler",
+          "scheduler": "simple",
+          "denoise": 1,
+          "model": [
+            "75",
+            0
+          ],
+          "positive": [
+            "154",
+            0
+          ],
+          "negative": [
+            "154",
+            1
+          ],
+          "latent_image": [
+            "154",
+            2
+          ]
+        },
+        "class_type": "KSampler",
+        "_meta": {
+          "title": "KSampler"
+        }
+      },
+      "8": {
+        "inputs": {
+          "samples": [
+            "3",
+            0
+          ],
+          "vae": [
+            "39",
+            0
+          ]
+        },
+        "class_type": "VAEDecode",
+        "_meta": {
+          "title": "VAEDecode"
+        }
+      },
+      "37": {
+        "inputs": {
+          "filename": "qwenImageEdit_qwenImgEditFp8E4m3fn.safetensors"
+        },
+        "class_type": "UNETLoader",
+        "_meta": {
+          "title": "UNETLoader"
+        }
+      },
+      "38": {
+        "inputs": {
+          "filename": "qwen_2.5_vl_7b_fp8_scaled.safetensors"
+        },
+        "class_type": "CLIPLoader",
+        "_meta": {
+          "title": "CLIPLoader"
+        }
+      },
+      "39": {
+        "inputs": {
+          "filename": "qwen_image_vae.safetensors"
+        },
+        "class_type": "VAELoader",
+        "_meta": {
+          "title": "VAELoader"
+        }
+      },
+      "66": {
+        "inputs": {
+          "value": 3,
+          "model": [
+            "89",
+            0
+          ]
+        },
+        "class_type": "ModelSamplingAuraFlow",
+        "_meta": {
+          "title": "ModelSamplingAuraFlow"
+        }
+      },
+      "75": {
+        "inputs": {
+          "value": 1,
+          "model": [
+            "66",
+            0
+          ]
+        },
+        "class_type": "CFGNorm",
+        "_meta": {
+          "title": "CFGNorm"
+        }
+      },
+      "89": {
+        "inputs": {
+          "filename": "Qwen-Image-Lightning-4steps-V1.0.safetensors",
+          "model": [
+            "37",
+            0
+          ]
+        },
+        "class_type": "LoraLoaderModelOnly",
+        "_meta": {
+          "title": "LoraLoaderModelOnly"
+        }
+      },
+      "110": {
+        "inputs": {
+          "text": "",
+          "clip": [
+            "38",
+            0
+          ],
+          "vae": [
+            "39",
+            0
+          ],
+          "image1": [
+            "149",
+            1
+          ]
+        },
+        "class_type": "TextEncodeQwenImageEditPlus",
+        "_meta": {
+          "title": "TextEncodeQwenImageEditPlus"
+        }
+      },
+      "111": {
+        "inputs": {
+          "filename": "Make her a black gorgeous woman. Dark skin, black hair",
+          "clip": [
+            "38",
+            0
+          ],
+          "vae": [
+            "39",
+            0
+          ],
+          "image1": [
+            "149",
+            1
+          ]
+        },
+        "class_type": "TextEncodeQwenImageEditPlus",
+        "_meta": {
+          "title": "TextEncodeQwenImageEditPlus"
+        }
+      },
+      "130": {
+        "inputs": {
+          "text": "negative",
+          "CONDITIONING": [
+            "110",
+            0
+          ]
+        },
+        "class_type": "SetNode",
+        "_meta": {
+          "title": "Set_negative"
+        }
+      },
+      "135": {
+        "inputs": {
+          "text": "Qwen-IE-2509_Inpaint",
+          "images": [
+            "161",
+            0
+          ]
+        },
+        "class_type": "SaveImageKJ",
+        "_meta": {
+          "title": "SaveImageKJ"
+        }
+      },
+      "149": {
+        "inputs": {
+          "text": "bilinear",
+          "image": [
+            "178",
+            0
+          ],
+          "mask": [
+            "178",
+            1
+          ]
+        },
+        "class_type": "InpaintCropImproved",
+        "_meta": {
+          "title": "InpaintCropImproved"
+        }
+      },
+      "154": {
+        "inputs": {
+          "value": true,
+          "positive": [
+            "111",
+            0
+          ],
+          "negative": [
+            "110",
+            0
+          ],
+          "vae": [
+            "39",
+            0
+          ],
+          "pixels": [
+            "149",
+            1
+          ],
+          "mask": [
+            "149",
+            2
+          ]
+        },
+        "class_type": "InpaintModelConditioning",
+        "_meta": {
+          "title": "InpaintModelConditioning"
+        }
+      },
+      "161": {
+        "inputs": {
+          "stitcher": [
+            "149",
+            0
+          ],
+          "inpainted_image": [
+            "8",
+            0
+          ]
+        },
+        "class_type": "InpaintStitchImproved",
+        "_meta": {
+          "title": "InpaintStitchImproved"
+        }
+      },
+      "178": {
+        "inputs": {
+          "image": "clipspace/clipspace-painted-masked-1768323498973.png [input]"
+        },
+        "class_type": "LoadImage",
+        "_meta": {
+          "title": "LoadImage"
+        }
+      }
+    }
+  }
+}

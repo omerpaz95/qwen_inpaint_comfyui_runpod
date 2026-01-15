@@ -13,6 +13,10 @@ RUN comfy node install --exit-on-fail comfyui-rmbg@2.9.6
 RUN git clone https://github.com/1038lab/ComfyUI-MiniMax-Remover /comfyui/custom_nodes/ComfyUI-MiniMax-Remover
 RUN pip install -r /comfyui/custom_nodes/ComfyUI-MiniMax-Remover/requirements.txt
 
+RUN ls /comfyui
+RUN rm -f /comfyui/extra_model_paths.yaml
+RUN ls /comfyui
+ADD extra_model_paths.yaml /comfyui/extra_model_paths.yaml
 
 # download models into comfyui
 # RUN comfy model download --url https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors --relative-path models/text_encoders --filename qwen_2.5_vl_7b_fp8_scaled.safetensors
